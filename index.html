@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hazardex™</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        header {
+            background-color: #0056b3;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+        }
+        nav {
+            margin-top: 10px;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 30px auto;
+        }
+        .about, .services, .testimonial {
+            background: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .about h2, .services h2, .testimonial h2 {
+            color: #0056b3;
+        }
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 15px 0;
+            margin-top: 30px;
+        }
+
+        /* Neon efekt */
+        .neon {
+            color: #fff;
+            text-shadow: 0 0 5px #f0f, 0 0 10px #f0f, 0 0 20px #f0f;
+            animation: flicker 1s infinite alternate;
+        }
+
+        @keyframes flicker {
+            from { opacity: 1; }
+            to { opacity: 0.7; }
+        }
+
+        /* Przycisk Fortuny */
+        .fortune-btn {
+            display: block;
+            margin: 20px auto;
+            padding: 15px 30px;
+            font-size: 18px;
+            background: gold;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        /* Dymek ostrzegający */
+        .warning {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            background: #ffdddd;
+            padding: 10px 15px;
+            border: 1px solid red;
+            border-radius: 8px;
+            font-size: 14px;
+            z-index: 1000;
+        }
+
+        /* Pasek na żywo */
+        .ticker {
+            background: #0056b3;
+            color: white;
+            padding: 10px;
+            font-weight: bold;
+        }
+
+        /* Licznik */
+        #visitor-counter {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 14px;
+            color: gray;
+        }
+
+        /* Mute button */
+        #muteBtn {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background: #333;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            z-index: 1001;
+        }
+    </style>
+</head>
+<body>
+
+<marquee class="ticker">
+    💰 Jan z Krakowa wygrał właśnie 12 500 PLN | 🎉 Turniej Pokerowy startuje o 21:00 | 🍸 Happy Hour w barze od 20:00!
+</marquee>
+
+<button id="muteBtn" onclick="toggleAudio()">🔊</button>
+
+<audio id="casinoAudio" loop autoplay>
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    Twoja przeglądarka nie obsługuje dźwięku.
+</audio>
+
+<header>
+    <h1 class="neon">Hazardex™</h1>
+    <nav>
+        <a href="#about">O nas</a>
+        <a href="https://www.instagram.com/hazardex_sp.z.o.o?igsh=czFsMXFqeDRqNjlz" target="_blank">Kontkat</a>
+        <a href="#contact">Kontakt</a>
+        <a href="https://maps.app.goo.gl/cMvFJoat3vbpe5jq5" target="_blank">Lokalizacja</a>
+    </nav>
+</header>
+
+<div class="container">
+    <section id="about" class="about">
+        <h2>O nas</h2>
+        <p>Nasze kasyno to miejsce rozrywki premium, łączące luksusowy wystrój z emocjonującą atmosferą gry...</p>
+    </section>
+
+    <section id="services" class="services">
+        <h2>Nasza oferta</h2>
+        <ul>
+            <li>Nowoczesne automaty i klasyczne gry hazardowe</li>
+            <li>Orkiestra jazzowa na żywo</li>
+            <li>Możliwość wynajęcia luksusowego 5 gwiazdkowego pokoju hotelowego</li>
+            <li>Specjalna sekcja z zakładami bukmacherskimi</li>
+        </ul>
+    </section>
+
+    <section class="testimonial">
+        <h2>💬 Opinie naszych gości</h2>
+        <blockquote>
+            „Wszedłem tylko na chwilę... wyszedłem z żoną, drinkiem i nowym Mercedesem. Polecam!” – Zbyszek, 58 lat
+        </blockquote>
+    </section>
+
+    <button class="fortune-btn" onclick="spinTheWheel()">🎰 Zakręć Fortuną!</button>
+
+    <div id="visitor-counter">
+        👁️ Liczba odwiedzin strony (totalnie prawdziwa): <span id="visit-count">0</span>
+    </div>
+</div>
+
+<footer id="contact">
+    <p>Kontakt: hazardex@kontakt.pl | Tel: +48 123 456 789</p>
+    <p>&copy; 2025 Hazardex™. Wszelkie prawa zastrzeżone.</p>
+</footer>
+
+<div class="warning">
+    🔞 Hazard może uzależniać. Graj odpowiedzialnie!
+</div>
+
+<!-- 🎉 Konfetti -->
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+<script>
+    function spinTheWheel() {
+        alert('Wygrałeś darmowego drinka 🍸!');
+        confetti({
+            particleCount: 150,
+            spread: 90,
+            origin: { y: 0.6 }
+        });
+    }
+
+    // Odwiedziny
+    let count = localStorage.getItem('visitCount') || 0;
+    count++;
+    localStorage.setItem('visitCount', count);
+    document.getElementById('visit-count').textContent = count;
+
+    // Audio toggle
+    function toggleAudio() {
+        const audio = document.getElementById("casinoAudio");
+        const btn = document.getElementById("muteBtn");
+        if (audio.paused) {
+            audio.play();
+            btn.textContent = "🔊";
+        } else {
+            audio.pause();
+            btn.textContent = "🔇";
+        }
+    }
+
+    // Konsola ASCII
+    console.log(`
+     _   _                       _           _           
+    | | | | __ _ _ __  ___  ___| |__   __ _| |_ ___ _ __ 
+    | |_| |/ _\` | '_ \\/ __|/ _ \\ '_ \\ / _\` | __/ _ \\ '__|
+    |  _  | (_| | | | \\__ \\  __/ | | | (_| | ||  __/ |   
+    |_| |_|\\__,_|_| |_|___/\\___|_| |_|\\__,_|\\__\\___|_|   
+
+            Witaj w Hazardex™ – klikaj odpowiedzialnie!
+    `);
+</script>
+
+</body>
+</html>
